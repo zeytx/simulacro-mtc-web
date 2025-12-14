@@ -10,6 +10,7 @@
             --secondary-color: #1a1a1a;
             --bg-color: #f5f5f7;
             --text-color: #333;
+            --accent-color: #ffc107; /* Amarillo para etiquetas */
         }
 
         body {
@@ -23,47 +24,73 @@
 
         header {
             background-color: white;
-            padding: 20px;
+            padding: 40px 20px;
             text-align: center;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
 
         .container {
-            max_width: 800px;
+            max-width: 800px;
             margin: 0 auto;
             padding: 20px;
         }
 
         h1 {
             color: var(--secondary-color);
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             margin-bottom: 10px;
+            margin-top: 10px;
         }
 
         .subtitle {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: #666;
             margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .hero-btn {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: bold;
-            font-size: 1.1rem;
+        /* Estilos para la zona de descarga (Badge + QR) */
+        .download-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .app-store-badge img {
             transition: transform 0.2s;
-            margin-bottom: 40px;
         }
 
-        .hero-btn:hover {
+        .app-store-badge img:hover {
             transform: scale(1.05);
-            background-color: #b71c1c;
         }
 
+        .qr-container {
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            display: inline-block;
+            text-align: center;
+        }
+
+        .qr-img {
+            width: 150px;
+            height: 150px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .qr-label {
+            font-size: 0.8rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Grid de características */
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -76,6 +103,27 @@
             padding: 25px;
             border-radius: 15px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Estilo especial para la tarjeta de IA */
+        .feature-card.coming-soon {
+            border: 2px solid var(--primary-color);
+            background: #fffafa;
+        }
+
+        .badge-soon {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 10px;
+            font-size: 0.7rem;
+            border-radius: 0 0 0 10px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-weight: bold;
+            text-transform: uppercase;
         }
 
         .feature-icon {
@@ -117,6 +165,8 @@
         @media (max-width: 600px) {
             h1 { font-size: 1.8rem; }
             .container { padding: 15px; }
+            /* En móviles ocultamos el QR para ahorrar espacio, ya que ya están en el cel */
+            .qr-container { display: none; } 
         }
     </style>
 </head>
@@ -124,11 +174,20 @@
 
     <header>
         <div class="container">
-            <div style="font-size: 3rem; margin-bottom: 10px;">🚗🇵🇪</div> 
+            <div style="font-size: 4rem; margin-bottom: 10px;">🚗🇵🇪</div> 
             <h1>Simulacro MTC Perú 2025</h1>
-            <p class="subtitle">Asegura tu brevete a la primera con el balotario actualizado.</p>
+            <p class="subtitle">Asegura tu brevete a la primera. Estudia, practica y aprende con IA.</p>
             
-            <a href="https://apps.apple.com/pe/app/simulacro-mtc-peru/id6756247516" class="hero-btn">Descargar en App Store</a>
+            <div class="download-area">
+                <a href="https://apps.apple.com/pe/app/simulacro-mtc-peru/id6756247516?itscg=30200&itsct=apps_box_badge&mttnsubad=6756247516" style="display: inline-block;" class="app-store-badge">
+                    <img src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-app-store/black/es-mx?releaseDate=1765584000" alt="Download on the App Store" style="width: 200px; height: auto; vertical-align: middle; object-fit: contain;" />
+                </a>
+
+                <div class="qr-container">
+                    <img src="qr-code.png" alt="Escanea para descargar" class="qr-img">
+                    <div class="qr-label">Escanea para descargar</div>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -136,12 +195,19 @@
         
         <section class="intro">
             <p>¿Te estás preparando para el examen de conocimientos del Ministerio de Transportes y Comunicaciones (MTC) del Perú? Esta aplicación es la herramienta ideal para estudiar, practicar y aprobar tu examen teórico sin estrés.</p>
-            <p>Domina las reglas de tránsito, señales y mecánica básica con nuestra base de datos actualizada. Simula el examen real todas las veces que necesites y revisa tus errores al instante.</p>
         </section>
 
         <h2 style="text-align: center; margin: 40px 0;">Características Principales</h2>
 
         <div class="features-grid">
+            
+            <div class="feature-card coming-soon">
+                <div class="badge-soon">Muy Pronto</div>
+                <span class="feature-icon">🤖</span>
+                <h3>Profesor Personalizado IA</h3>
+                <p>¿Tienes dudas de por qué fallaste? Nuestro <strong>tutor de Inteligencia Artificial</strong> te explicará al detalle cada respuesta. Aprende la lógica detrás de las normas, no solo de memoria.</p>
+            </div>
+
             <div class="feature-card">
                 <span class="feature-icon">📶</span>
                 <h3>Modo Offline GRATIS</h3>
